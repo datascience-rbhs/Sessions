@@ -1,0 +1,265 @@
+---
+title: "Session 1"
+output: html_document
+date: "2024-01-26"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# Session 1
+
+## Importing Data, Data Wrangling, and Tidy Data
+
+### Objectives of today's session
+
+1.  Import various datasets
+
+2.  Use `dplyr` package to preprocess our datasets
+
+## Plan
+
+1.  Read excel file, show arguments how they work
+2.  Read tab-delimited file, show arguments how they work
+3.  Read comma-sep files, show arguments how they work
+4.  For other types of files, json, xml look for function in R
+5.  **Exercise: Import a sample CSV file and an Excel file into R from directory**
+6.  Introduction to **`dplyr`** packages.
+7.  Common data manipulation tasks: filtering, selecting, mutating, summarizing.
+8.  Grouping data and performing operations on groups.
+9.  Joining data from different sources.
+10. Handling missing data.
+11. **Exercise: ask students to do some basic operations on sample dataset from prev exercise**
+
+Tidy data is **a standard way of mapping the meaning of a dataset to its structure**.
+
+# 
+
+------------------------------------------------------------------------
+
+## R is simple calculator
+
+| Operator | Description                 |
+|----------|-----------------------------|
+| \+       | Addition                    |
+| \-       | Subtraction                 |
+| \*       | Multiplication              |
+| /        | Division                    |
+| \^       | Exponentiation (Power)      |
+| %%       | Modulus (Remainder)         |
+| %/%      | Integer Division (Quotient) |
+
+```{r}
+398 + 783
+
+600 / 5
+
+45 * 45
+```
+
+[**Exercise: Try doing following calculation using math operators**]{style="color:red"}
+
+$$
+\frac{1+5^{1/2}} {2}
+$$
+
+```{r}
+
+```
+
+[**Exercise: find modulus of 5 divided by 2**]{style="color:red"}
+
+```{r}
+
+```
+
+------------------------------------------------------------------------
+
+# R script
+
+# Data types
+
+```{r}
+num_variable <- 42.5
+class(num_variable)
+```
+
+```{r}
+char_variable = "Welcome to the DS club"
+class(char_variable)
+```
+
+```{r}
+logic_variable = TRUE
+class(logic_variable)
+```
+
+```{r}
+num_variable == 42.5
+class(num_variable == 42.5)
+```
+
+# R Functions
+
+3 Key Properties of an R function.
+
+-   functions have a name and they are case sensetive
+
+-   following the name they have a pair of ()
+
+-   inside (), function take 0 or more arguments
+
+```{r}
+summ_two_numbers <- function(a=3, b=6){
+  return(a+b)
+}
+
+summ_two_numbers()
+summ_two_numbers(5, 19)
+```
+
+[**Exercise: Complete this code to return square of 9**]{style="color:red"}
+
+```{r}
+squared_num <- function(x){
+  squared = ___
+  return(___)
+}
+
+squared_num(9)
+```
+
+------------------------------------------------------------------------
+
+# R vectors
+
+```{r}
+nums_vector = c(2, 5, 10, 60)
+
+nums_vector[3]
+
+nums_vector[2:3]
+
+nums_vector[nums_vector > 9]
+```
+
+**Exercise: create a vector of odd numbers till 10 and return numbers greater than 5**
+
+```{r}
+
+```
+
+# 
+
+# Read data
+
+```{r}
+df = read.table('file.txt')
+df = read.csv('file.csv')
+```
+
+# Using libraries
+
+All libraries are installed in this environment
+
+```{r}
+library(readr)
+
+df = readr::read_csv('file.csv', col_select = c('col1'))
+```
+
+[Exercise: install library for excel files "readxl" and read "file.xlsx" using `read_excel` function]{style="color:red"}
+
+```{r}
+library(readxl)
+excel_file = readxl::read_excel('file.xls', sheet = 'Sheet1')
+excel_file
+```
+
+------------------------------------------------------------------------
+
+# Split cells
+
+Exercise: load `tidyr` package
+
+```{r}
+data <- data.frame(
+  Event_ID = c('ENSG_9580385_SE', 'ENSG_9580385_SE', 'ENSG_9580385_SE', 'ENSG_9580385_SE', 'ENSG_9580385_SE'),
+  PSI_value_1 = as.character(c('0.', '0.', '0.', '0.', '1.')),
+  PSI_value_2 = as.character(c(1,2,3,4,0)),
+  Attribute1 = c("A", "B", "B", "A", "A"), 
+  Attribute2 = c('NA', 5, "NA", 9, 'NA')
+)
+
+data
+```
+
+```{r}
+
+tidyr::unite()
+
+tidyr::separate_wider_delim()
+```
+
+Exercise: work with another dataset, unite and separate
+
+```{r}
+
+```
+
+# Reshape data
+
+```{r}
+tidyr::pivot_wider()
+```
+
+# Dplyr
+
+# joining, transforming and summarizing
+
+```{r}
+dplyr::right_join() # row-wise joining of AS events
+
+dplyr::left_join()
+
+dplyr::select()
+
+dplyr::mutate()
+
+dplyr::filter()
+
+dplyr::group_by() and dplyr::summarise()
+
+
+```
+
+Exercise: select and maybe group_by examples
+
+# Write data
+
+```{r}
+write.csv()
+
+readr::write_excel_csv()
+```
